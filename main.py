@@ -8,10 +8,13 @@ def add_item(inventory, name, price, quantity):
     price (str): The price of the item
     quantity (str): The quantity of the item
     """
+  
     inventory[name] = {"price": price, "quantity": quantity}
     print(f"{name} added to the inventory.")
 
-def remove_item(inventory, item_name):
+
+
+def remove_item(inventory):
     """
     Remove an item from the inventory.
     
@@ -19,8 +22,12 @@ def remove_item(inventory, item_name):
     inventory (dict): The current inventory
     item_name (str): The name of the item to remove
     """
-    del inventory[item_name]
-    print(f"{item_name} removed from the inventory.")
+
+    #del inventory[item_name]#(this line doesnt work because it looking for an index number)
+
+    del inventory[name]
+    print(f"{inventory[name]} removed from the inventory.") 
+    
 
 def update_quantity(inventory, item_name, new_quantity):
     """
@@ -65,8 +72,8 @@ while True:
         quantity = int(input("Enter item quantity: "))
         add_item(inventory, name, price, quantity)
     elif choice == "2":
-        name = input("Enter item name to remove: ")
-        remove_item(inventory, name)
+        name = str(input("Enter item name to remove: "))
+        remove_item( inventory[name])
     elif choice == "3":
         name = input("Enter item name to update: ")
         quantity = input("Enter new quantity: ")
