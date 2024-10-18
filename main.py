@@ -8,13 +8,10 @@ def add_item(inventory, name, price, quantity):
     price (str): The price of the item
     quantity (str): The quantity of the item
     """
-  
     inventory[name] = {"price": price, "quantity": quantity}
     print(f"{name} added to the inventory.")
 
-
-
-def remove_item(inventory):
+def remove_item(inventory, item_name):
     """
     Remove an item from the inventory.
     
@@ -22,12 +19,8 @@ def remove_item(inventory):
     inventory (dict): The current inventory
     item_name (str): The name of the item to remove
     """
-
-    #del inventory[item_name]#(this line doesnt work because it looking for an index number)
-
-    del inventory[name]
-    print(f"{inventory[name]} removed from the inventory.") 
-    
+    del inventory[item_name]
+    print(f"{item_name} removed from the inventory.")
 
 def update_quantity(inventory, item_name, new_quantity):
     """
@@ -38,7 +31,7 @@ def update_quantity(inventory, item_name, new_quantity):
     item_name (str): The name of the item to update
     new_quantity (str): The new quantity of the item
     """
-    inventory[item_name]["quantity"] == new_quantity
+    inventory[item_name]["quantity"] = new_quantity
     print(f"{item_name} quantity updated to {new_quantity}.")
 
 def display_inventory(inventory):
@@ -63,17 +56,27 @@ inventory = {
 }
 
 while True:
+    display_inventory(inventory)
     print("\n1. Add item\n2. Remove item\n3. Update quantity\n4. Display inventory\n5. Exit")
     choice = input("Enter your choice (1-5): ")
 
     if choice == "1":
         name = input("Enter item name: ")
-        price = input("Enter item price: ")
+        if name in inventory:
+            confirm = input("this item already exists in inventory are you sure you want to overide it? Yes or No")
+            if confirm == "No":
+                continue
+            else:
+                price = int(input("Enter item price: "))
+                quantity = int(input("Enter item quantity: "))
+                add_item(inventory, name, price, quantity)
+                
+        price = int(input("Enter item price: "))
         quantity = int(input("Enter item quantity: "))
         add_item(inventory, name, price, quantity)
     elif choice == "2":
-        name = str(input("Enter item name to remove: "))
-        remove_item( inventory[name])
+        name = input("Enter item name to remove: ")
+        remove_item(inventory, name)
     elif choice == "3":
         name = input("Enter item name to update: ")
         quantity = input("Enter new quantity: ")

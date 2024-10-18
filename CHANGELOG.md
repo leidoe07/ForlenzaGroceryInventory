@@ -15,3 +15,8 @@
   - Search for items by name.
 
 
+## Version 1.3
+-2024-10-18
+-"inventory[item_name]["quantity"] = new_quantity' so that update_quantity fuction would work correctly and quantity updates would reflect in the inventory
+- added a warning in the while loop to confirm whether or not users want to ovverride items in the inventory
+- added display_ inventory at top of while loop  so that the inventory is constantly showing
